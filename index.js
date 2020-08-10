@@ -12,6 +12,8 @@ const noteApi = require('./routes/notesApi');
 //Config constants
 const { SERVER_PORT, SERVER_RESTART_AT_ms, MONGODB_CONNECTION_URI } = require('./config');
 
+//express static files
+app.use("/", express.static("./build"));
 
 // cors
 app.use(cors());
@@ -23,6 +25,12 @@ app.use(express.json());
 authApi(app);
 boardsApi(app);
 noteApi(app);
+
+//send index.html for all the others get routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './build/index.html'));
+}
+);
 
 // Catch 404
 app.use(notFoundHandler);
