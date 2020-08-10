@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const consola = require('consola');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 const { logErrors, wrapErrors, errorHandler } = require('./utils/middlewares/errorHandlers');
 const notFoundHandler = require('./utils/middlewares/notFoundHandler');
