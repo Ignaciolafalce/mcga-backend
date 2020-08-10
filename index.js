@@ -5,6 +5,7 @@ const cors = require('cors');
 const app = express();
 const { logErrors, wrapErrors, errorHandler } = require('./utils/middlewares/errorHandlers');
 const notFoundHandler = require('./utils/middlewares/notFoundHandler');
+const authApi = require('./routes/authApi');
 
 //Config constants
 const { SERVER_PORT, SERVER_RESTART_AT_ms, MONGODB_CONNECTION_URI } = require('./config');
@@ -15,6 +16,9 @@ app.use(cors());
 
 //content type json
 app.use(express.json());
+
+// Api routes
+authApi(app);
 
 // Catch 404
 app.use(notFoundHandler);
