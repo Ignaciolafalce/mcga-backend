@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const consola = require('consola');
 const cors = require('cors');
 const app = express();
+const { logErrors, wrapErrors, errorHandler } = require('./utils/middlewares/errorHandlers');
+const notFoundHandler = require('./utils/middlewares/notFoundHandler');
 
 //Config constants
 const { SERVER_PORT, SERVER_RESTART_AT_ms, MONGODB_CONNECTION_URI } = require('./config');
@@ -13,6 +15,14 @@ app.use(cors());
 
 //content type json
 app.use(express.json());
+
+// Catch 404
+app.use(notFoundHandler);
+
+// Errors middleware
+app.use(logErrors);
+app.use(wrapErrors);
+app.use(errorHandler)
 
 //start/restart application function
 async function startApp(restart = true) {
