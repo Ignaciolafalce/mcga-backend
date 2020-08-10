@@ -6,6 +6,7 @@ const app = express();
 const { logErrors, wrapErrors, errorHandler } = require('./utils/middlewares/errorHandlers');
 const notFoundHandler = require('./utils/middlewares/notFoundHandler');
 const authApi = require('./routes/authApi');
+const boardsApi = require('./routes/boardsApi');
 
 //Config constants
 const { SERVER_PORT, SERVER_RESTART_AT_ms, MONGODB_CONNECTION_URI } = require('./config');
@@ -19,6 +20,7 @@ app.use(express.json());
 
 // Api routes
 authApi(app);
+boardsApi(app)
 
 // Catch 404
 app.use(notFoundHandler);
